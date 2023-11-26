@@ -84,18 +84,18 @@ char *getlog(void){
 
   while(current != NULL){
     if(buf == NULL){
-      buf = calloc(sizeof(char)*(strlen(current->item.string) + strlen(ctime(&(current->item.time))) + 4) + last, sizeof(char));
+      buf = calloc(sizeof(char)*(strlen(current->item.string) + strlen(ctime(&(current->item.time))) + 9) + last, sizeof(char));
     }
     else{
-      buf = realloc(buf, sizeof(char)*(strlen(current->item.string) + strlen(ctime(&(current->item.time))) + 4) + last);
+      buf = realloc(buf, sizeof(char)*(strlen(current->item.string) + strlen(ctime(&(current->item.time))) + 9) + last);
     }   
-    last += sizeof(char)*(strlen(current->item.string) + strlen(ctime(&(current->item.time))) + 4) + sizeof(buf);
+    last += sizeof(char)*(strlen(current->item.string) + strlen(ctime(&(current->item.time))) + 9) + sizeof(buf);
 
     time_string = ctime(&current->item.time);
     removeNewline(time_string);
 
     strcat(buf, time_string);
-    strcat(buf, " - ");
+    strcat(buf, "   --   ");
     strcat(buf, current->item.string);
     strcat(buf, "\n");
 
@@ -107,6 +107,7 @@ char *getlog(void){
 
 int savelog(char* filename){ 
   FILE* fp = (filename == NULL) ? stdout : fopen(filename, "w+");
+  
   char *buf = getlog();
   fprintf(fp, "%s", buf);
   if(fp != stdout){
@@ -129,8 +130,8 @@ int savelog(char* filename){
 //   b.string = "uhoh";
 //   b.time = currentTime;
 
-//   logdat(d);
-//   logdat(b);
+//   logprntdat(d);
+//   logprntstr("test");
 
 //   savelog(NULL);
 //   clearlog();
