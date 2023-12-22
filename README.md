@@ -1,4 +1,4 @@
-# Clog, a C logger
+# Clog, the C logger
 Logs statements in C.
 
 # Functionality
