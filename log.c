@@ -10,24 +10,52 @@ struct log_linked_list {
 } typedef log_t;
 
 
-log_t *HEAD;
-log_t *curr_log;
+log_t *HEAD = NULL;
+log_t *curr_log = NULL;
 
-int init(){
-  HEAD = malloc(sizeof(log_t));
-  if(HEAD != NULL){
-    HEAD = (log_t){"", NULL};
+// int init(){
+//   HEAD = malloc(sizeof(log_t));
+//   if(HEAD != NULL){
+//     *HEAD = (log_t){"", NULL};
+//   }
+
+//   return 0;
+// }
+
+// int add_log(char *txt){
+//   curr_log->strdat = txt;
+//   curr_log->next = malloc(sizeof(log_t));
+//   curr_log = curr_log->next;
+
+//   return 0;
+// }
+
+log_t *getlog(){
+  if(HEAD == NULL){
+    HEAD = malloc(sizeof(log_t));
+    curr_log = HEAD;
   }
-
-  return 0;
+  return curr_log;
 }
 
-int add_log(char *txt){
-  curr_log->strdat = txt;
-  curr_log->next = malloc(sizeof(log_t));
-  curr_log = curr_log->next;
+int ltrace(){   //make all logs variadic 
+  return 1;
+}
 
-  return 0;
+int ldebug(){
+  return 1;
+}
+
+int linfo(){
+  return 1;
+}
+
+int lerror(){
+  return 1;
+}
+
+int lfatal(){
+  return 1;
 }
 
 int free_log(log_t *head){
@@ -42,20 +70,16 @@ int free_log(log_t *head){
 
 int display_log(log_t *head){
   while(head != NULL){
-    printf("%s\n", head->txt);
+    printf("%s\n", head->strdat);
   }
 
   return 0;
 }
 
 int main(){
-  add_log("yay");
-  add_log("test2");
-
   display_log(HEAD);
-
+  
   free_log(HEAD);
-
 
   return 1;
 }
