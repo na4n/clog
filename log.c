@@ -38,7 +38,18 @@ log_t *getlog(){
   return curr_log;
 }
 
+char *time(){
+  time_t rawtime;
+  time(&rawtime);
+  struct tm *timeinfo = localtime(&rawtime);
+
+  return asctime(timeinfo);
+}
+
 int ltrace(){   //make all logs variadic 
+
+
+  
   return 1;
 }
 
